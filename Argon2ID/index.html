@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script language="javascript">
+function postForm(){
+const formData = new FormData();
+const loginField = document.querySelector('input[name="login"]');
+const passField = document.querySelector('input[name="password"]');
+const message = document.querySelector('p[id="message"]');
+formData.append('login', loginField.value);
+formData.append('password', passField.value);
+
+fetch('/login.php', {
+  method: 'POST',
+  body: formData
+})
+.then(response => response.json())
+.then(result => {
+	message.textContent='User signed in';
+})
+.catch(error => {
+	message.textContent='Bad username or password';
+	});
+}
+</script>
+
+<meta charset = "UTF-8">
+<title>Argon2ID based login form</title>
+</head>
+<body>
+<form method="POST" action="/" name="login">
+<div>Username:&nbsp;<input type="text" name="login" value="" /></div>
+<div>Password:&nbsp;<input type="password" name="password" value=""  /></div>
+<div><input type="Button" name="sumbit" value="Login" onClick="postForm()" /></div>
+<div><p id="message"></p></div>
+</body>
+</html>

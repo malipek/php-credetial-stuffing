@@ -1,0 +1,4 @@
+FROM php:cli-alpine3.17
+COPY ./Argon2ID /app
+EXPOSE 8000
+ENTRYPOINT ["php","-S","0.0.0.0:8000","-t","/app"]
